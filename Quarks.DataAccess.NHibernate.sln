@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C845F593-6959-48C7-9267-6984A39DD8F0}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+		build.cmd = build.cmd
+		build.ps1 = build.ps1
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{741817B9-3E0C-4EDA-9FE1-9F3F239EFE7F}"
+	ProjectSection(SolutionItems) = preProject
+		tools\packages.config = tools\packages.config
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quarks.DataAccess.NHibernate", "src\Quarks.DataAccess.NHibernate\Quarks.DataAccess.NHibernate.xproj", "{7609DCC3-A748-4B9F-B19D-07FDFC4BA72A}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quarks.DataAccess.NHibernate.Tests", "tests\Quarks.DataAccess.NHibernate.Tests\Quarks.DataAccess.NHibernate.Tests.xproj", "{918D0641-0869-451A-A297-98D824B2984E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7609DCC3-A748-4B9F-B19D-07FDFC4BA72A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7609DCC3-A748-4B9F-B19D-07FDFC4BA72A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7609DCC3-A748-4B9F-B19D-07FDFC4BA72A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7609DCC3-A748-4B9F-B19D-07FDFC4BA72A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{918D0641-0869-451A-A297-98D824B2984E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918D0641-0869-451A-A297-98D824B2984E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918D0641-0869-451A-A297-98D824B2984E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918D0641-0869-451A-A297-98D824B2984E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{741817B9-3E0C-4EDA-9FE1-9F3F239EFE7F} = {C845F593-6959-48C7-9267-6984A39DD8F0}
+	EndGlobalSection
+EndGlobal
