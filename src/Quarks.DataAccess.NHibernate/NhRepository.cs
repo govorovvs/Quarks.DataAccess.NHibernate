@@ -17,12 +17,12 @@ namespace Quarks.DataAccess.NHibernate
 
 		protected ISession Session
 		{
-			get { return UnitOfWork.Session; }
+			get { return Transaction.Session; }
 		}
 
-		private NhUnitOfWork UnitOfWork
+		private NhTransaction Transaction
 		{
-			get { return NhUnitOfWork.GetCurrent(_sessionManager); }
+			get { return NhTransaction.GetCurrent(_sessionManager); }
 		}
 	}
 }
