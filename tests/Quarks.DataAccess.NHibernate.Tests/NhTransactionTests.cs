@@ -5,11 +5,11 @@ using Moq;
 using NHibernate;
 using NUnit.Framework;
 using Quarks.DataAccess.NHibernate.SessionManagement;
-using Quarks.DomainModel.Impl;
+using Quarks.Transactions.Impl;
 
 namespace Quarks.DataAccess.NHibernate.Tests
 {
-    public class NhUnitOfWorkTests
+    public class NhTransactionTests
 	{
 		private CancellationToken _cancellationToken;
 	    private INhSessionManager _sessionManager;
@@ -35,25 +35,25 @@ namespace Quarks.DataAccess.NHibernate.Tests
 		[Test]
 		public void Can_Be_Constructed_With_ContextManager()
 		{
-			var unitOfWork = new NhUnitOfWork(_sessionManager);
+			var transaction = new NhTransaction(_sessionManager);
 
-			Assert.That(unitOfWork.SessionManager, Is.EqualTo(_sessionManager));
+			Assert.That(transaction.SessionManager, Is.EqualTo(_sessionManager));
 		}
 
 		[Test]
-		public void Is_Instance_Of_IDependentUnitOfWork()
+		public void Is_Instance_Of_IDependentTransaction()
 		{
-			NhUnitOfWork unitOfWork = CreateUnitOfWork();
+			NhTransaction transaction = CreateTransaction();
 
-			Assert.That(unitOfWork, Is.InstanceOf<IDependentUnitOfWork>());
+			Assert.That(transaction, Is.InstanceOf<IDependentTransaction>());
 		}
 
 		[Test]
 		public void Session_Test()
 		{
-			NhUnitOfWork unitOfWork = CreateUnitOfWork();
+			NhTransaction transaction = CreateTransaction();
 
-			Assert.That(unitOfWork.Session, Is.SameAs(_session));
+			Assert.That(transaction.Session, Is.SameAs(_session));
 		}
 
 		[Test]
@@ -62,9 +62,9 @@ namespace Quarks.DataAccess.NHibernate.Tests
 			Mock.Get(_session)
 				.Setup(x => x.Dispose());
 
-			NhUnitOfWork unitOfWork = CreateUnitOfWork();
+			NhTransaction transaction = CreateTransaction();
 
-			unitOfWork.Dispose();
+			transaction.Dispose();
 
 			Mock.Get(_session).VerifyAll();
 		}
@@ -75,9 +75,9 @@ namespace Quarks.DataAccess.NHibernate.Tests
 			Mock.Get(_transaction)
 				.Setup(x => x.Dispose());
 
-			NhUnitOfWork unitOfWork = CreateUnitOfWork();
+			NhTransaction transaction = CreateTransaction();
 
-			unitOfWork.Dispose();
+			transaction.Dispose();
 
 			Mock.Get(_transaction).VerifyAll();
 		}
@@ -85,11 +85,11 @@ namespace Quarks.DataAccess.NHibernate.Tests
 		[Test]
 		public void Dispose_Throws_An_Exception_If_It_Was_Previously_Disposed()
 		{
-			var unitOfWork = CreateUnitOfWork();
+			var transaction = CreateTransaction();
 
-			unitOfWork.Dispose();
+			transaction.Dispose();
 
-			Assert.Throws<ObjectDisposedException>(() => unitOfWork.Dispose());
+			Assert.Throws<ObjectDisposedException>(() => transaction.Dispose());
 		}
 
 		[Test]
@@ -98,9 +98,9 @@ namespace Quarks.DataAccess.NHibernate.Tests
 			Mock.Get(_transaction)
 				.Setup(x => x.Commit());
 
-			var unitOfWork = CreateUnitOfWork();
+			var transaction = CreateTransaction();
 
-			await unitOfWork.CommitAsync(_cancellationToken);
+			await transaction.CommitAsync(_cancellationToken);
 
 			Mock.Get(_transaction).VerifyAll();
 		}
@@ -110,9 +110,9 @@ namespace Quarks.DataAccess.NHibernate.Tests
 		{
 			Mock.Get(_session)
 				.Setup(x => x.Flush());
-			var unitOfWork = CreateUnitOfWork();
+			var transaction = CreateTransaction();
 
-			await unitOfWork.CommitAsync(_cancellationToken);
+			await transaction.CommitAsync(_cancellationToken);
 
 			Mock.Get(_session).VerifyAll();
 		}
@@ -120,20 +120,20 @@ namespace Quarks.DataAccess.NHibernate.Tests
 		[Test]
 		public void Commit_Throws_An_Exception_If_It_Was_Previously_Disposed()
 		{
-			var unitOfWork = CreateUnitOfWork();
+			var transaction = CreateTransaction();
 
-			unitOfWork.Dispose();
+			transaction.Dispose();
 
-			Assert.ThrowsAsync<ObjectDisposedException>(() => unitOfWork.CommitAsync(_cancellationToken));
+			Assert.ThrowsAsync<ObjectDisposedException>(() => transaction.CommitAsync(_cancellationToken));
 		}
 
-		private NhUnitOfWork CreateUnitOfWork()
+		private NhTransaction CreateTransaction()
 		{
-			var unitOfWork = new NhUnitOfWork(_sessionManager);
+			var transaction = new NhTransaction(_sessionManager);
 
-			Assert.That(unitOfWork.Session, Is.Not.Null);
+			Assert.That(transaction.Session, Is.Not.Null);
 
-			return unitOfWork;
+			return transaction;
 		}
 	}
 }

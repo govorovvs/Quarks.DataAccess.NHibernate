@@ -2,12 +2,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Quarks.DataAccess.NHibernate.SessionManagement;
-using Quarks.DomainModel.Impl;
 using NHibernate;
+using Quarks.Transactions.Impl;
 
 namespace Quarks.DataAccess.NHibernate
 {
-	internal class NhUnitOfWork : IDependentUnitOfWork
+	internal class NhTransaction : IDependentTransaction
 	{
 		private static readonly object StaticLock = new object();
 		private readonly object _lock = new object();
@@ -15,7 +15,7 @@ namespace Quarks.DataAccess.NHibernate
 		private volatile ISession _session;
 		private ITransaction _transaction;
 
-		internal NhUnitOfWork(INhSessionManager sessionManager)
+		internal NhTransaction(INhSessionManager sessionManager)
 		{
 			if (sessionManager == null) throw new ArgumentNullException(nameof(sessionManager));
 
@@ -77,29 +77,30 @@ namespace Quarks.DataAccess.NHibernate
 			return _session;
 		}
 
-		public static NhUnitOfWork GetCurrent(INhSessionManager sessionManager)
+		public static NhTransaction GetCurrent(INhSessionManager sessionManager)
 		{
-			if (UnitOfWork.Current == null)
+			Transaction transaction = Transaction.Current;
+			if (transaction == null)
 			{
-				return new NhUnitOfWork(sessionManager);
+				return new NhTransaction(sessionManager);
 			}
 
 			string key = sessionManager.GetHashCode().ToString();
 
-			IDependentUnitOfWork current;
-			if (!UnitOfWork.Current.DependentUnitOfWorks.TryGetValue(key, out current))
+			IDependentTransaction current;
+			if (!transaction.DependentTransactions.TryGetValue(key, out current))
 			{
 				lock (StaticLock)
 				{
-					if (!UnitOfWork.Current.DependentUnitOfWorks.TryGetValue(key, out current))
+					if (!transaction.DependentTransactions.TryGetValue(key, out current))
 					{
-						current = new NhUnitOfWork(sessionManager);
-						UnitOfWork.Current.Enlist(key, current);
+						current = new NhTransaction(sessionManager);
+						transaction.Enlist(key, current);
 					}
 				}
 			}
 
-			return (NhUnitOfWork)current;
+			return (NhTransaction)current;
 		}
 	}
 }
