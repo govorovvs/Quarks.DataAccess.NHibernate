@@ -50,7 +50,7 @@ namespace Quarks.DataAccess.NHibernate
 				_session.Flush();
 			}
 
-			return Task.CompletedTask;
+			return Task.FromResult(0);
 		}
 
 		private void ThrowIfDisposed()
