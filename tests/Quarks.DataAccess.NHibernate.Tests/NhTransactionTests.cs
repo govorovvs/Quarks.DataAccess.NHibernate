@@ -5,7 +5,8 @@ using Moq;
 using NHibernate;
 using NUnit.Framework;
 using Quarks.DataAccess.NHibernate.SessionManagement;
-using Quarks.Transactions.Impl;
+using Quarks.Transactions;
+using ITransaction = NHibernate.ITransaction;
 
 namespace Quarks.DataAccess.NHibernate.Tests
 {

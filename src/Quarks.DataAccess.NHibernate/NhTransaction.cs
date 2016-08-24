@@ -3,7 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Quarks.DataAccess.NHibernate.SessionManagement;
 using NHibernate;
-using Quarks.Transactions.Impl;
+using Quarks.Transactions;
+using ITransaction = NHibernate.ITransaction;
 
 namespace Quarks.DataAccess.NHibernate
 {
