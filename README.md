@@ -19,7 +19,7 @@ public class UserMap : ClassMap<User>
 	{
 		Table("Users");
 
-		Id(x => x.Id, "Id).GeneratedBy().Identity();
+		Id(x => x.Id, "Id").GeneratedBy().Identity();
 		Map(x => x.Name, "Name");
 	}
 }
