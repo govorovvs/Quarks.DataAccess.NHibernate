@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "dotnet-test-nunit": "3.4.0-beta-2",
-    "Moq": "4.5.23",
+    "dotnet-test-nunit": "3.4.0-beta-3",
+    "Moq": "4.5.28",
     "NHibernate": "4.0.4.4000",
     "NUnit": "3.5.0",
     "Quarks.DataAccess.NHibernate": "1.4.0-*",
-    "Quarks.Transactions": "2.3.0"
+    "Quarks.Transactions": "2.3.1"
   },
   "frameworks": {
     "net46": {
