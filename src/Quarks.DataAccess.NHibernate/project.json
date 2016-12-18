@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "NHibernate": "4.0.4.4000",
+    "NHibernate": "4.1.0.4000",
     "Quarks.Transactions": "2.3.2"
   },
   "frameworks": {
@@ -19,5 +19,5 @@
     "tags": [ "quarks", "architecture", "dataaccess", "nhibernate" ]
   },
   "title": "Quarks.DataAccess.NHibernate",
-  "version": "1.4.1-*"
+  "version": "1.4.2-*"
 }
