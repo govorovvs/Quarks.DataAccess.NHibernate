@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Quarks.DataAccess.NHibernate
+namespace Quarks.DataAccess.NHibernate.Async
 {
     public static class NhQueryableAsyncExtensions
     {
