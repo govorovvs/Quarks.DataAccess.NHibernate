@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Moq;
 using NHibernate;
 using NUnit.Framework;
-using Quarks.DataAccess.NHibernate.SessionManagement;
 using Quarks.Transactions;
 using ITransaction = NHibernate.ITransaction;
 
@@ -13,7 +12,7 @@ namespace Quarks.DataAccess.NHibernate.Tests
     public class NhTransactionTests
 	{
 		private CancellationToken _cancellationToken;
-	    private INhSessionManager _sessionManager;
+	    private INhSessionFactory _sessionManager;
 	    private ISession _session;
 	    private ITransaction _transaction;
 
@@ -21,7 +20,7 @@ namespace Quarks.DataAccess.NHibernate.Tests
 	    public void SetUp()
 	    {
 			_cancellationToken = new CancellationTokenSource().Token;
-			_sessionManager = new Mock<INhSessionManager>().Object;
+			_sessionManager = new Mock<INhSessionFactory>().Object;
 			_session = new Mock<ISession>().Object;
 		    _transaction = new Mock<ITransaction>().Object;
 
@@ -36,15 +35,15 @@ namespace Quarks.DataAccess.NHibernate.Tests
 		[Test]
 		public void Can_Be_Constructed_With_ContextManager()
 		{
-			var transaction = new NhTransaction(_sessionManager);
+			var transaction = new NhTransactionImpl(_sessionManager);
 
-			Assert.That(transaction.SessionManager, Is.EqualTo(_sessionManager));
+			Assert.That(transaction.SessionFactory, Is.EqualTo(_sessionManager));
 		}
 
 		[Test]
 		public void Is_Instance_Of_IDependentTransaction()
 		{
-			NhTransaction transaction = CreateTransaction();
+			INhTransaction transaction = CreateTransaction();
 
 			Assert.That(transaction, Is.InstanceOf<IDependentTransaction>());
 		}
@@ -52,7 +51,7 @@ namespace Quarks.DataAccess.NHibernate.Tests
 		[Test]
 		public void Session_Test()
 		{
-			NhTransaction transaction = CreateTransaction();
+			var transaction = CreateTransaction();
 
 			Assert.That(transaction.Session, Is.SameAs(_session));
 		}
@@ -63,7 +62,7 @@ namespace Quarks.DataAccess.NHibernate.Tests
 			Mock.Get(_session)
 				.Setup(x => x.Dispose());
 
-			NhTransaction transaction = CreateTransaction();
+			var transaction = CreateTransaction();
 
 			transaction.Dispose();
 
@@ -76,7 +75,7 @@ namespace Quarks.DataAccess.NHibernate.Tests
 			Mock.Get(_transaction)
 				.Setup(x => x.Dispose());
 
-			NhTransaction transaction = CreateTransaction();
+			var transaction = CreateTransaction();
 
 			transaction.Dispose();
 
@@ -128,9 +127,9 @@ namespace Quarks.DataAccess.NHibernate.Tests
 			Assert.ThrowsAsync<ObjectDisposedException>(() => transaction.CommitAsync(_cancellationToken));
 		}
 
-		private NhTransaction CreateTransaction()
+		private NhTransactionImpl CreateTransaction()
 		{
-			var transaction = new NhTransaction(_sessionManager);
+			var transaction = new NhTransactionImpl(_sessionManager);
 
 			Assert.That(transaction.Session, Is.Not.Null);
 

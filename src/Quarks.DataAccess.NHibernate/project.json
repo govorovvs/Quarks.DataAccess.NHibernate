@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "NHibernate": "4.1.0.4000",
-    "Quarks.Transactions": "2.3.2"
+    "NHibernate": "4.1.1.4000",
+    "Quarks.Transactions": "2.4.0"
   },
   "frameworks": {
     "net45": {
