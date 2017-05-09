@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C845F593-6959-48C7-9267-6984A39DD8F0}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,7 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.cake = build.cake
 		build.cmd = build.cmd
 		build.ps1 = build.ps1
-		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -18,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{741817B9
 		tools\packages.config = tools\packages.config
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quarks.DataAccess.NHibernate", "src\Quarks.DataAccess.NHibernate\Quarks.DataAccess.NHibernate.xproj", "{7609DCC3-A748-4B9F-B19D-07FDFC4BA72A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quarks.DataAccess.NHibernate", "src\Quarks.DataAccess.NHibernate\Quarks.DataAccess.NHibernate.csproj", "{7609DCC3-A748-4B9F-B19D-07FDFC4BA72A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quarks.DataAccess.NHibernate.Tests", "tests\Quarks.DataAccess.NHibernate.Tests\Quarks.DataAccess.NHibernate.Tests.xproj", "{918D0641-0869-451A-A297-98D824B2984E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quarks.DataAccess.NHibernate.Tests", "tests\Quarks.DataAccess.NHibernate.Tests\Quarks.DataAccess.NHibernate.Tests.csproj", "{918D0641-0869-451A-A297-98D824B2984E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
