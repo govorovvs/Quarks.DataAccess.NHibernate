@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyTitle>Quarks.DataAccess.NHibernate</AssemblyTitle>
+    <VersionPrefix>1.4.2</VersionPrefix>
+    <TargetFramework>net45</TargetFramework>
+    <AssemblyName>Quarks.DataAccess.NHibernate</AssemblyName>
+    <PackageId>Quarks.DataAccess.NHibernate</PackageId>
+    <PackageTags>quarks;architecture;dataaccess;nhibernate</PackageTags>
+    <PackageIconUrl>https://github.com/govorovvs/Quarks.DataAccess.NHibernate/blob/master/logo.png?raw=true</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/govorovvs/Quarks.DataAccess.NHibernate.git</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/govorovvs/Quarks.DataAccess.NHibernate.git</RepositoryUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Version>1.4.3</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="4.1.1.4000" />
+    <PackageReference Include="Quarks.Transactions" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

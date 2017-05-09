@@ -1,10 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using NHibernate;
-// ReSharper disable UnusedParameter.Global
-// ReSharper disable UnusedMember.Global
 
-namespace Quarks.DataAccess.NHibernate
+namespace Quarks.DataAccess.NHibernate.Async
 {
     public static class NhSessionAsyncExtensions
     {

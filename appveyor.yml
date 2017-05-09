@@ -1,4 +1,4 @@
-version: 1.4.2.{build}
+version: 1.4.3.{build}
 image: Visual Studio 2015
 branches:
   only:
@@ -11,5 +11,5 @@ build_script:
 test: off
 deploy: off 
 artifacts:
-  - path: TestResult.xml
+  - path: 'artifacts\unit-tests.xml'
   - path: 'packages\*.nupkg'

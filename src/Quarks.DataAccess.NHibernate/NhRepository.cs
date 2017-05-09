@@ -1,28 +1,22 @@
 ﻿using System;
 using NHibernate;
-using Quarks.DataAccess.NHibernate.SessionManagement;
 
 namespace Quarks.DataAccess.NHibernate
 {
 	public abstract class NhRepository
 	{
-		private readonly INhSessionManager _sessionManager;
+		private readonly INhSessionProvider _sessionProvider;
 
-		protected NhRepository(INhSessionManager sessionManager)
+		protected NhRepository(INhSessionProvider sessionProvider)
 		{
-			if (sessionManager == null) throw new ArgumentNullException(nameof(sessionManager));
+			if (sessionProvider == null) throw new ArgumentNullException(nameof(sessionProvider));
 
-			_sessionManager = sessionManager;
+            _sessionProvider = sessionProvider;
 		}
 
 		protected ISession Session
 		{
-			get { return Transaction.Session; }
-		}
-
-		private NhTransaction Transaction
-		{
-			get { return NhTransaction.GetCurrent(_sessionManager); }
+			get { return _sessionProvider.Session; }
 		}
 	}
 }
