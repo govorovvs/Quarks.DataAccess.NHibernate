@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <AssemblyTitle>Quarks.DataAccess.NHibernate</AssemblyTitle>
-    <VersionPrefix>1.4.2</VersionPrefix>
-    <TargetFramework>net45</TargetFramework>
+    <VersionPrefix>1.5.0</VersionPrefix>
+    <TargetFramework>net461</TargetFramework>
     <AssemblyName>Quarks.DataAccess.NHibernate</AssemblyName>
     <PackageId>Quarks.DataAccess.NHibernate</PackageId>
     <PackageTags>quarks;architecture;dataaccess;nhibernate</PackageTags>
@@ -14,15 +14,16 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>1.4.3</Version>
+    <Version>1.5.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NHibernate" Version="4.1.1.4000" />
-    <PackageReference Include="Quarks.Transactions" Version="2.4.1" />
+    <PackageReference Include="Iesi.Collections" Version="4.0.2" />
+    <PackageReference Include="Quarks.Transactions" Version="2.5.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
