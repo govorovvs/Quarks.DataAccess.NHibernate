@@ -16,17 +16,12 @@ namespace Quarks.DataAccess.NHibernate
 
         internal NhTransactionImpl(INhSessionFactory sessionFactory)
         {
-            if (sessionFactory == null) throw new ArgumentNullException(nameof(sessionFactory));
-
-            SessionFactory = sessionFactory;
+            SessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
         }
 
         public INhSessionFactory SessionFactory { get; }
 
-        public ISession Session
-        {
-            get { return GetOrCreateSession(); }
-        }
+        public ISession Session => GetOrCreateSession();
 
         public void Dispose()
         {
@@ -41,17 +36,17 @@ namespace Quarks.DataAccess.NHibernate
             _disposed = true;
         }
 
-        public Task CommitAsync(CancellationToken cancellationToken)
+        public async Task CommitAsync(CancellationToken cancellationToken)
         {
             ThrowIfDisposed();
 
-            if (_session != null)
-            {
-                _transaction.Commit();
-                _session.Flush();
-            }
+            if (_session == null)
+                return;
 
-            return Task.FromResult(0);
+            await _transaction.CommitAsync(cancellationToken)
+                .ConfigureAwait(false);
+            await _session.FlushAsync(cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private void ThrowIfDisposed()

@@ -24,12 +24,8 @@ namespace Quarks.DataAccess.NHibernate.Tests
 			_session = new Mock<ISession>().Object;
 		    _transaction = new Mock<ITransaction>().Object;
 
-			Mock.Get(_sessionManager)
-				.Setup(x => x.CreateSession())
-				.Returns(_session);
-		    Mock.Get(_session)
-			    .Setup(x => x.BeginTransaction())
-			    .Returns(_transaction);
+			Mock.Get(_sessionManager).Setup(x => x.CreateSession()).Returns(_session);
+		    Mock.Get(_session).Setup(x => x.BeginTransaction()).Returns(_transaction);
 	    }
 
 		[Test]
@@ -96,7 +92,7 @@ namespace Quarks.DataAccess.NHibernate.Tests
 		public async Task Commit_Commits_Transaction()
 		{
 			Mock.Get(_transaction)
-				.Setup(x => x.Commit());
+				.Setup(x => x.CommitAsync(_cancellationToken)).Returns(Task.CompletedTask);
 
 			var transaction = CreateTransaction();
 
@@ -108,8 +104,8 @@ namespace Quarks.DataAccess.NHibernate.Tests
 		[Test]
 		public async Task Commit_Flushes_Session()
 		{
-			Mock.Get(_session)
-				.Setup(x => x.Flush());
+		    Mock.Get(_session)
+		        .Setup(x => x.FlushAsync(_cancellationToken)).Returns(Task.CompletedTask);
 			var transaction = CreateTransaction();
 
 			await transaction.CommitAsync(_cancellationToken);

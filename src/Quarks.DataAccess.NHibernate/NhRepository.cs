@@ -9,14 +9,9 @@ namespace Quarks.DataAccess.NHibernate
 
 		protected NhRepository(INhSessionProvider sessionProvider)
 		{
-			if (sessionProvider == null) throw new ArgumentNullException(nameof(sessionProvider));
-
-            _sessionProvider = sessionProvider;
+            _sessionProvider = sessionProvider ?? throw new ArgumentNullException(nameof(sessionProvider));
 		}
 
-		protected ISession Session
-		{
-			get { return _sessionProvider.Session; }
-		}
+		protected ISession Session => _sessionProvider.Session;
 	}
 }

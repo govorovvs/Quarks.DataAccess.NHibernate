@@ -9,19 +9,11 @@ namespace Quarks.DataAccess.NHibernate
 
         public NhSessionProvider(INhSessionFactory sessionFactory)
         {
-            if (sessionFactory == null) throw new ArgumentNullException(nameof(sessionFactory));
-
-            _sessionFactory = sessionFactory;
+            _sessionFactory = sessionFactory ?? throw new ArgumentNullException(nameof(sessionFactory));
         }
 
-        public virtual ISession Session
-        {
-            get { return Transaction.Session; }
-        }
+        public virtual ISession Session => Transaction.Session;
 
-        private INhTransaction Transaction
-        {
-            get { return NhTransaction.GetCurrent(_sessionFactory); }
-        }
+        private INhTransaction Transaction => NhTransaction.GetCurrent(_sessionFactory);
     }
 }

@@ -6,14 +6,12 @@ namespace Quarks.DataAccess.NHibernate
     {
         public static INhTransaction GetCurrent(INhSessionFactory sessionFactory)
         {
-            string key = sessionFactory.GetHashCode().ToString();
             Transaction transaction = Transaction.Current;
+            if (transaction == null)
+                return new NhTransactionImpl(sessionFactory);
 
-            IDependentTransaction current =
-                transaction == null
-                    ? new NhTransactionImpl(sessionFactory)
-                    : transaction.GetOrEnlist(key, () => new NhTransactionImpl(sessionFactory));
-            return (INhTransaction)current;
+            string key = sessionFactory.GetHashCode().ToString();
+            return (INhTransaction)transaction.GetOrEnlist(key, () => new NhTransactionImpl(sessionFactory));
         }
     }
 }
