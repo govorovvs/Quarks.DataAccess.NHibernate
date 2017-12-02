@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <AssemblyTitle>Quarks.DataAccess.NHibernate</AssemblyTitle>
-    <VersionPrefix>1.5.0</VersionPrefix>
     <TargetFramework>net461</TargetFramework>
     <AssemblyName>Quarks.DataAccess.NHibernate</AssemblyName>
     <PackageId>Quarks.DataAccess.NHibernate</PackageId>
@@ -14,11 +13,11 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>1.6.2</Version>
+    <Version>1.6.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.0.1" />
+    <PackageReference Include="NHibernate" Version="5.0.3" />
     <PackageReference Include="Iesi.Collections" Version="4.0.2" />
     <PackageReference Include="Quarks.Transactions" Version="2.5.0" />
   </ItemGroup>
