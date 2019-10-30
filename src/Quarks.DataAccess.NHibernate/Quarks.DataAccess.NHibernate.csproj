@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <AssemblyTitle>Quarks.DataAccess.NHibernate</AssemblyTitle>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>Quarks.DataAccess.NHibernate</AssemblyName>
     <PackageId>Quarks.DataAccess.NHibernate</PackageId>
     <PackageTags>quarks;architecture;dataaccess;nhibernate</PackageTags>
@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NHibernate" Version="5.2.5" />
+    <PackageReference Include="NHibernate" Version="5.2.6" />
     <PackageReference Include="Quarks.Transactions" Version="2.5.0" />
   </ItemGroup>
 </Project>
